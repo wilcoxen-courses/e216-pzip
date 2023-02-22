@@ -11,33 +11,54 @@ import matplotlib.pyplot as plt
 #%%
 
 #
-#  A few RE examples using the firstlines.csv file
+#  A few RE examples using the demo.csv file
 #
 
-first = pd.read_csv('firstlines.csv')
-first = first[['localminute']]
+demo = pd.read_csv('demo.csv',dtype=str)
+
+#
+#  Drop records with missing data for Meeting Days. Make a copy of the new
+#  dataframe so we can add columns later.
+#
+
+trim = demo.dropna(subset="Days")
+trim = trim.copy()
 
 #
 #  Look for specific contents in a string
 #
 
-first['has_:2']    = first["localminute"].str.contains(":2")
-first['has_3or5']  = first["localminute"].str.contains(r"3|5")
-first['ends_4to6'] = first["localminute"].str.contains(r"4$|5$|6$")
+has_AM = trim['Time'].str.contains("AM")
+print( trim[ has_AM ] )
+
+has_AMPM = trim['Time'].str.contains("AM.*PM")
+print( trim[ has_AMPM ] )
+
+is_TT = trim['Days'].str.contains(r"Tu|Th")
+print( trim[ is_TT ] )
+
+is_LD = trim['Number'].str.contains(r"^1|^2")
+print( trim[ is_LD ] )
+
+ends_0or5 = trim['Number'].str.contains(r"0$|5$")
+print( trim[ is_LD & ends_0or5 ] )
 
 #
 #  Split a string into a list using an RE and store the list in a
 #  column of a dataframe
 #
 
-first['split'] = first["localminute"].str.split(r"/| |:")
+trim['Split'] = trim["Time"].str.split(r":| - | ")
 
 #
 #  Split a string into a list using an RE and create a new dataframe
 #  from the pieces
 #
 
-expanded = first["localminute"].str.split(r"/| |:", expand=True)
+exp = trim["Time"].str.split(r":| - | ", expand=True)
+
+
+#%%
 
 #%%
 
