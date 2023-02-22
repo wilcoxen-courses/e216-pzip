@@ -8,8 +8,6 @@ Demonstrate some features of REs and Matplotlib.
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#%%
-
 #
 #  A few RE examples using the demo.csv file
 #
@@ -29,19 +27,19 @@ trim = trim.copy()
 #
 
 has_AM = trim['Time'].str.contains("AM")
-print( trim[ has_AM ] )
+print( trim[ has_AM ], "\n" )
 
 has_AMPM = trim['Time'].str.contains("AM.*PM")
-print( trim[ has_AMPM ] )
+print( trim[ has_AMPM ], "\n" )
 
 is_TT = trim['Days'].str.contains(r"Tu|Th")
-print( trim[ is_TT ] )
+print( trim[ is_TT ], "\n" )
 
 is_LD = trim['Number'].str.contains(r"^1|^2")
-print( trim[ is_LD ] )
+print( trim[ is_LD ], "\n" )
 
 ends_0or5 = trim['Number'].str.contains(r"0$|5$")
-print( trim[ is_LD & ends_0or5 ] )
+print( trim[ is_LD & ends_0or5 ], "\n" )
 
 #
 #  Split a string into a list using an RE and store the list in a
@@ -49,18 +47,20 @@ print( trim[ is_LD & ends_0or5 ] )
 #
 
 trim['Split'] = trim["Time"].str.split(r":| - | ")
+print( trim, "\n" )
 
-#
 #  Split a string into a list using an RE and create a new dataframe
 #  from the pieces
 #
 
 exp = trim["Time"].str.split(r":| - | ", expand=True)
-
-
-#%%
+print( exp, "\n" )
 
 #%%
+
+#
+#  Now illustrate some features of matplotlib
+#
 
 #  Set the default figure resolution
 
@@ -69,8 +69,6 @@ plt.rcParams['figure.dpi'] = 300
 #  Read in ETR data from the earlier assignment
 
 hh_data = pd.read_csv('etrs.csv')
-
-#%%
 
 #
 #  Draw a basic histogram
