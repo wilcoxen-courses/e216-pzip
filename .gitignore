@@ -33,3 +33,5 @@ makefile
 *.pkl
 *.zip
 *.csv
+
+!etrs.csv
