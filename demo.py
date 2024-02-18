@@ -74,13 +74,13 @@ hh_data = pd.read_csv('etrs.csv')
 #  Draw a basic histogram
 #
 
-fig0,ax0 = plt.subplots()
+fig1,ax1 = plt.subplots()
 
-hh_data['etr'].plot.hist(ax=ax0,bins=20,title='Distribution of ETRs')
+hh_data['etr'].plot.hist(ax=ax1,bins=20,title='Distribution of ETRs')
 
-ax0.set_xlabel('ETR')
+ax1.set_xlabel('ETR')
 
-fig0.tight_layout()
+fig1.tight_layout()
 
 #%%
 
