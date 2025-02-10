@@ -6,7 +6,7 @@ This exercise focuses on Matplotlib and Pandas features that are useful for work
 
 ## Input Data
 
-The input data is a file called **id114_2014.zip** that will need to be downloaded from the course Google Drive. Please resist the temptation to unzip the file: the contents are large (72 MB) and part of the point of the exercise is to work with the data _without_ unzipping the file first. If you'd like to see what the data looks like, see **firstlines.csv** in the Google Drive folder: it has the file's first 10 lines.
+The input data is a file called **id114_2014.zip** that will need to be downloaded from the course Google Drive. Please **do not** unzip the file: the contents are large (72 MB) and part of the point of the exercise is to work with the data _without_ unzipping the file first. If you'd like to see what the data looks like, see **firstlines.csv** in the Google Drive folder: it has the file's first 10 lines.
 
 The zip file contains a single large CSV file called **id114_2014.csv**. It contains data from the Pecan Street Project, a research project in Austin, Texas, that collects high resolution data on household electricity consumption. This file particular file is the data for household 114 in 2014.
 
@@ -22,7 +22,7 @@ A script called **pecan.py** that goes through the steps below to produce a sort
 
 The first steps will load the data and filter out records that are missing either `"localminute"` or `"use"`.
 
-1. Import `pandas as pd` and `matplotlib.pyplot as plt`.
+1. Import `pandas` as `pd` and `matplotlib.pyplot` as `plt`.
 
 1. Set the default DPI for plots to 300 by setting the Matplotlib parameter dictionary entry `plt.rcParams["figure.dpi"]` to `300`. The change will only affect plots made by this script: it's not permanent.
 
@@ -30,7 +30,7 @@ The first steps will load the data and filter out records that are missing eithe
 
 1. Create variable `start` by calling the `.head()` method of `raw` to select the first few rows. Open `start` in Spyder's Variable Explorer to see what it looks like.
 
-1. Drop rows from `raw` that are missing key data by creating a variable called `usable` that is equal to the result of calling the `.dropna()` method of `raw` with the argument `subset=["localminute","use"]`. That will drop any record for which either `"localminute"` or `"use"` has missing ("not available") data.
+1. Drop rows from `raw` that are missing key data by creating a variable called `usable` that is equal to the result of calling the `.dropna()` method of `raw` with the argument `subset=["localminute","use"]`. That will drop any record for which either `"localminute"` or `"use"` has missing data ("not available" in Pandas terminology).
 
 1. Print a message giving the number of dropped records. The number is the difference between the lengths of the dataframes: `len(raw)-len(usable)`.
 
@@ -50,7 +50,7 @@ Next we'll build a trimmed dataframe with just the data we'll need later. In the
 
 1. Print the result of applying the `.head()` method to `trim`. You should see 5 rows with the index and columns for `"mo"`, `"dy"`, `"yr"`, `"hr"`, `"mi"` and `"use"`.
 
-1. Now set `trim` to the result of calling the `.set_index()` method of `trim` with the following list as its argument: `["mo","dy","yr","hr","mi"]`.
+1. Now set `trim` to the result of calling the `.set_index()` method of `trim` with the following list as its argument: `["mo","dy","yr","hr","mi"]`. The result will be a dataframe with the date and time as its index.
 
 1. Finally, create a variable called `use_by_min` that is equal to the `"use"` column of `trim`.
 
